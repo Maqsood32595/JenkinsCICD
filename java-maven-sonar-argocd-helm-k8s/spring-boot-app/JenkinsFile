@@ -8,20 +8,19 @@ pipeline {
         git branch: 'test', url: 'https://github.com/Maqsood32595/Jenkins-Zero-To-Hero.git'
       }
     }
-    
-    stage('Build Docker Image') {
-      agent {
-        docker {
-          image 'frcho/java-tools'
-          args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-      }
-      steps {
-        script {
-          // Build the Docker image
-          sh 'docker build -t your_image_name:latest .'
-        }
-      }
+    // Add more stages here as needed
+  }
+  
+  // Optional post actions (if needed)
+  post {
+    always {
+      echo 'Pipeline completed.'
+    }
+    success {
+      echo 'Pipeline completed successfully.'
+    }
+    failure {
+      echo 'Pipeline failed.'
     }
   }
 }
