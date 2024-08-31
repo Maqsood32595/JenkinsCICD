@@ -5,7 +5,7 @@ pipeline {
     stage('Checkout') {
       steps {
         // Checkout code from your Git repository
-        git branch: 'main', url: 'https://github.com/Maqsood32595/Jenkins-Zero-To-Hero.git'
+        git branch: 'test', url: 'https://github.com/Maqsood32595/Jenkins-Zero-To-Hero.git'
       }
     }
     
@@ -18,10 +18,10 @@ pipeline {
       }
       steps {
         script {
+          // Build the Docker image
           sh 'docker build -t your_image_name:latest .'
         }
       }
     }
   }
 }
-
