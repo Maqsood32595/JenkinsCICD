@@ -1,8 +1,27 @@
 pipeline {
-  agent {
-    docker {
-      image 'frcho/java-tools'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+  agent any  // Use a generic agent for the entire pipeline
+
+  stages {
+    stage('Checkout') {
+      steps {
+        // Checkout code from your Git repository
+        git branch: 'main', url: 'https://github.com/Maqsood32595/Jenkins-Zero-To-Hero.git'
+      }
+    }
+    
+    stage('Build Docker Image') {
+      agent {
+        docker {
+          image 'frcho/java-tools'
+          args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
+        }
+      }
+      steps {
+        script {
+          sh 'docker build -t your_image_name:latest .'
+        }
+      }
     }
   }
-  
+}
+
